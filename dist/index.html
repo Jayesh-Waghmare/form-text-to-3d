@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Form — Text to 3D</title>
+    <meta
+      name="description"
+      content="Turn a text prompt into a 3D model with Shap-E. Explore the result and download a GLB."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23eb673d'/%3E%3Cpath d='m16 6 10 6v11l-10 5-10-5V12zm0 0v22M6 12l10 6 10-6' fill='none' stroke='white' stroke-width='2'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "/vendor/three.module.js",
+          "three/addons/": "/vendor/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="/" aria-label="Form home"
+        ><span class="brand-icon">◇</span> form<span class="brand-dot"
+          >.</span
+        ></a
+      ><span class="header-label">TEXT TO 3D STUDIO</span
+      ><a href="https://github.com/openai/shap-e" target="_blank" rel="noopener"
+        >Powered by Shap-E ↗</a
+      >
+    </header>
+    <main>
+      <aside>
+        <div class="section-number">01 / CREATE</div>
+        <h1>Create a 3D model</h1>
+        <p class="intro">Describe a single object to get started.</p>
+        <form id="prompt-form">
+          <label for="prompt">What would you like to create?</label>
+          <div class="prompt-box">
+            <textarea
+              id="prompt"
+              maxlength="800"
+              required
+              placeholder="A small green chair shaped like an avocado"
+            ></textarea
+            ><span id="count">0 / 800</span>
+          </div>
+          <p class="hint">
+            Simple, single objects work best. Try a shape, a color, and a few
+            distinctive details.
+          </p>
+          <label for="quality">Quality</label>
+          <select id="quality">
+            <option value="draft">Quick preview</option>
+            <option value="standard">Detailed model</option>
+          </select>
+          <p class="hint">
+            Detailed mode takes longer. CPU generation can take several minutes.
+          </p>
+          <button class="generate" id="generate" type="submit">
+            Generate model <span>↗</span>
+          </button>
+          <button class="cancel" id="cancel" type="button" hidden>
+            Stop waiting
+          </button>
+        </form>
+        <div class="examples">
+          <div class="sub-label">TRY A PROMPT</div>
+          <button
+            type="button"
+            data-prompt="A chair that looks like an avocado"
+          >
+            An avocado chair <span>↗</span></button
+          ><button type="button" data-prompt="A small retro spaceship">
+            A retro spaceship <span>↗</span></button
+          ><button type="button" data-prompt="A birthday cupcake">
+            A birthday cupcake <span>↗</span>
+          </button>
+        </div>
+        <div class="model-note">
+          <span class="status-dot"></span>
+          <div>
+            <strong>Shap-E · OpenAI</strong>
+            <p>
+              <span id="engine-note">Checking the model server…</span
+              ><br /><span id="engine-detail"
+                >Runs Shap-E directly on your server.</span
+              >
+            </p>
+          </div>
+        </div>
+      </aside>
+      <section class="workspace" aria-label="3D model workspace">
+        <div class="workspace-top">
+          <div>
+            <span class="section-number">02 / EXPLORE</span>
+            <h2>3D preview</h2>
+          </div>
+          <span class="format-pill">.GLB</span>
+        </div>
+        <div class="viewport" id="viewport">
+          <div class="view-top">
+            <span id="model-label">SAMPLE / AVOCADO CHAIR</span
+            ><span class="view-badge">PERSPECTIVE</span>
+          </div>
+          <div
+            id="canvas-host"
+            role="img"
+            aria-label="Interactive 3D viewer. Drag to rotate and scroll to zoom."
+          ></div>
+          <div class="overlay" id="loading" hidden>
+            <div class="spinner"></div>
+            <strong id="loading-title">Joining the generation queue…</strong>
+            <p id="loading-detail">
+              Your model will appear here when it’s ready.
+            </p>
+            <span id="elapsed">0:00</span>
+          </div>
+          <div class="view-bottom">
+            <span
+              ><i class="live-dot"></i
+              ><span id="view-status"
+                >Sample model · built with Three.js</span
+              ></span
+            >
+            <div class="axis">
+              <span class="axis-y">Y</span><span class="axis-z">Z</span
+              ><span class="axis-x">X</span>
+            </div>
+          </div>
+          <div class="viewer-controls">
+            <button
+              id="rotate"
+              aria-label="Toggle automatic rotation"
+              aria-pressed="false"
+              title="Auto rotate"
+            >
+              ⟳</button
+            ><button id="reset" aria-label="Reset camera" title="Reset view">
+              ⌖</button
+            ><button
+              id="wireframe"
+              aria-label="Toggle wireframe"
+              aria-pressed="false"
+              title="Wireframe"
+            >
+              ▱
+            </button>
+          </div>
+        </div>
+        <div class="viewer-footer">
+          <p>
+            <span>↔</span> Drag to rotate <span class="divider">/</span> Scroll
+            to zoom <span class="divider">/</span> Right-drag to pan
+          </p>
+          <a
+            id="download"
+            class="download"
+            href="/sample.glb"
+            download="form-sample-avocado-chair.glb"
+            >↓ <span>Download sample</span></a
+          >
+        </div>
+        <div class="feedback" id="feedback" role="status" aria-live="polite">
+          This is a sample to explore the viewer. Enter a prompt to generate
+          your own model.
+        </div>
+        <div class="detail-strip">
+          <div><span>GENERATION</span><strong>Text → 3D</strong></div>
+          <div><span>MODEL</span><strong>Shap-E</strong></div>
+          <div><span>EXPORT</span><strong>GLB / glTF 2.0</strong></div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <span>FORM / TEXT TO 3D</span><span>Shap-E generation · GLB export</span>
+    </footer>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

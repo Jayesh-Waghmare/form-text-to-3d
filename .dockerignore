@@ -1,0 +1,7 @@
+.git
+.venv
+.model-cache
+outputs
+node_modules
+*.zip
+__pycache__

@@ -1,0 +1,8 @@
+.env*
+node_modules/
+.sites-runtime/
+*.tar.gz
+.venv/
+.model-cache/
+outputs/
+__pycache__/
