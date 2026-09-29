@@ -3,7 +3,7 @@ from zipfile import ZipFile, ZIP_DEFLATED
 
 root = Path(__file__).resolve().parents[1]
 destination = root.parent / "form-source.zip"
-items = ["backend.py", "requirements.txt", "Dockerfile", ".dockerignore", ".gitignore",
+items = ["backend.py", "requirements.txt", "requirements-dev.txt", "Dockerfile", ".dockerignore", ".gitignore",
          "start-local.ps1", "start-local.sh", "vercel.json", "package.json", "README.md",
          "REQUIREMENTS.md", "dist", "scripts", "tests"]
 with ZipFile(destination, "w", ZIP_DEFLATED) as archive:

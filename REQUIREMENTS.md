@@ -29,6 +29,9 @@ The browser-saved car's SHA-256 is `7b99cbda4221c802ccee435a52d3e83e9683f648eece
 - All three official model checkpoints passed their published SHA-256 hashes.
 - Sample GLB exports and loads back with all nine meshes.
 - Completed results reopen from their result URLs while the server retains the job.
+- Desktop (1280 px) and mobile (390 px) layouts fit without horizontal overflow. Prompt shortcuts, quality selection, whitespace validation, wireframe controls, and invalid result-link handling were checked in the browser.
+- The browser reported no console errors when reopening the generated cupcake.
+- Windows startup now stops on failed environment creation, dependency installation, or server startup. Test dependencies are listed separately in `requirements-dev.txt`.
 - JavaScript syntax checks pass.
 - CPU previews took roughly 10–15 minutes each after weights were available; observed peak process working memory was about 3.8 GB. Detailed mode was not timed.
 

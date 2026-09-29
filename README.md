@@ -65,6 +65,7 @@ No frontend build step is needed. The viewer library is served locally. Google F
 
 ```powershell
 node --test tests/generation.test.mjs
+.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
 .venv\Scripts\python.exe -m unittest discover -s tests -p test_backend.py
 node scripts/build-sample.mjs
 node scripts/verify-glb.mjs PATH_TO_DOWNLOADED_MODEL.glb
