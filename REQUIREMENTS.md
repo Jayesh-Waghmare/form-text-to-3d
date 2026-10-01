@@ -35,8 +35,9 @@ The browser-saved car's SHA-256 is `7b99cbda4221c802ccee435a52d3e83e9683f648eece
 - JavaScript syntax checks pass.
 - CPU previews took roughly 10–15 minutes each after weights were available; observed peak process working memory was about 3.8 GB. Detailed mode was not timed.
 - On the public ZeroGPU Space, `A small blue teapot` generated a colored mesh. Drag rotation and wheel zoom changed its view. The downloaded GLB was independently parsed by Three.js: 1,465,908 bytes, 36,624 vertices, 73,228 faces, one colored mesh, SHA-256 `06f3f81463be9994718f61c83551b36e0b40bf92cfc885ea922e0a120664c58a`.
-- Two later requests from the direct Space host returned Gradio's generic `Error` without a container traceback. The exact scheduler reason was not exposed. The quick allocation was reduced from 120 to 60 seconds to improve queue priority and reduce the quota required for each request; this follow-up adjustment needs a fresh generation check after quota is available.
+- Two earlier requests from the direct Space host returned Gradio's generic `Error` without a container traceback. The exact scheduler reason was not exposed. The quick allocation was reduced from 120 to 60 seconds to improve queue priority and reduce the quota required for each request.
+- On 1 October 2026, a fresh hosted quick-preview request for `A small green mushroom` completed with the 60-second allocation. The generated model rendered in the 3D viewer, and the site's download button saved a new GLB. Independent Three.js parsing found 2,248,632 bytes, one colored mesh, 56,210 vertices, and 112,340 faces; SHA-256 `e0152b9a03ba10c527c16414edea885b236ac1d78c147ae8d7abcf469b755931`.
 
 ## Remaining publishing work
 
-Free GPU quotas and queue availability can affect future runs. Retest the 60-second quick mode after the ZeroGPU quota window resets. Docker image build was not verified locally because the Docker daemon was unavailable.
+Free GPU quotas and queue availability can affect future runs. Docker image build was not verified locally because the Docker daemon was unavailable. The optional detailed mode was not timed on the hosted GPU.
