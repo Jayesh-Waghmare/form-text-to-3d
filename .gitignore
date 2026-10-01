@@ -3,6 +3,8 @@ node_modules/
 .sites-runtime/
 *.tar.gz
 .venv/
+.venv-space/
 .model-cache/
 outputs/
+hf-space/outputs/
 __pycache__/

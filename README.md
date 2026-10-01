@@ -15,6 +15,8 @@ The complete app uses a Python/FastAPI backend that runs Shap-E directly on CPU 
 
 **Verification:** See [REQUIREMENTS.md](REQUIREMENTS.md) for the completed checks and remaining publishing steps. The sample is labelled separately from AI-generated output.
 
+**Public Hugging Face Space:** [jayeshw/form-text-to-3d](https://huggingface.co/spaces/jayeshw/form-text-to-3d). Its [public source repository](https://huggingface.co/spaces/jayeshw/form-text-to-3d/tree/main) contains the separate Gradio/ZeroGPU edition from [`hf-space/`](hf-space/README.md). Hosted generation, rotation, zoom, and GLB download passed with a blue-teapot prompt. Free GPU access can queue or exhaust its daily quota.
+
 ## Run the complete app
 
 Use Python 3.12 or 3.13. Open a terminal in this directory:
@@ -91,6 +93,11 @@ The gitignore excludes environments, model weights, generated outputs, and local
 
 ## Deploy the complete app
 
+The free [Gradio ZeroGPU Space](https://huggingface.co/spaces/jayeshw/form-text-to-3d) uses the separate
+edition in [`hf-space/`](hf-space/README.md). That directory is the root
+of its own Space and uses a GPU allocation for generation. The original
+FastAPI/Docker edition below remains available for Docker hosts.
+
 Create a **Docker Space** on Hugging Face and upload `Dockerfile`, `requirements.txt`, `backend.py`, this `README.md`, and the entire `dist` folder. The YAML above configures port 7860. Use one worker; multiple workers have separate job queues and model copies.
 
 Alternatively, on a suitable Docker host:
@@ -102,7 +109,7 @@ docker run --rm -p 7860:7860 form-3d
 
 Docker build and deployment have not been run here. Test genuine generation on the deployed app before sharing its URL.
 
-**Check hosting eligibility.** Hugging Face lists CPU Basic with no hourly charge, but creating a Docker Space requires a paid plan. Its free-personal-account exception permits up to two **Gradio ZeroGPU** Spaces; this Docker app would need a Gradio/ZeroGPU adaptation to use that exception. Do not assume a new account can create a free Docker Space. [Current hardware and eligibility](https://huggingface.co/docs/hub/spaces-overview#hardware-resources).
+**Hosting eligibility.** Hugging Face lists CPU Basic with no hourly charge, but creating a Docker Space requires a paid plan. The public Gradio edition uses the free-personal-account **ZeroGPU** exception. [Current hardware and eligibility](https://huggingface.co/docs/hub/spaces-overview#hardware-resources).
 
 ## Static frontend option
 

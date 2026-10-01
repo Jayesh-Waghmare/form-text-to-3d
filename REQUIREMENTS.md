@@ -7,8 +7,8 @@
 | Display with a 3D library | Three.js GLTFLoader loaded both generated GLBs. Both objects rendered in the browser with their vertex colors. |
 | Rotate and zoom | Drag rotation and wheel zoom were tested on the generated car. OrbitControls also supports touch interaction and pan. |
 | Download a 3D format | The website saved the generated car as a GLB. The downloaded file's SHA-256 matches the server's original, and Three.js loaded the downloaded file independently. |
-| Free hosting | Full-app Docker configuration is prepared. Deployment is excluded at the user's request. Check the chosen host's current free-tier eligibility and memory allowance; static hosting alone cannot run this model. |
-| Live URL and source repository | Local Git repository and source ZIP are prepared. Public repository, live deployment, and both public URLs are left to the user. |
+| Free hosting | The public [Gradio ZeroGPU Space](https://huggingface.co/spaces/jayeshw/form-text-to-3d) built and ran on the user's eligible Hugging Face account. A blue-teapot prompt completed on the hosted GPU. |
+| Live URL and source repository | The [Space app](https://huggingface.co/spaces/jayeshw/form-text-to-3d) and its [public source repository](https://huggingface.co/spaces/jayeshw/form-text-to-3d/tree/main) are available. A separate GitHub push remains optional and was not done. |
 
 ## Genuine generation results
 
@@ -34,7 +34,9 @@ The browser-saved car's SHA-256 is `7b99cbda4221c802ccee435a52d3e83e9683f648eece
 - Windows startup now stops on failed environment creation, dependency installation, or server startup. Test dependencies are listed separately in `requirements-dev.txt`.
 - JavaScript syntax checks pass.
 - CPU previews took roughly 10–15 minutes each after weights were available; observed peak process working memory was about 3.8 GB. Detailed mode was not timed.
+- On the public ZeroGPU Space, `A small blue teapot` generated a colored mesh. Drag rotation and wheel zoom changed its view. The downloaded GLB was independently parsed by Three.js: 1,465,908 bytes, 36,624 vertices, 73,228 faces, one colored mesh, SHA-256 `06f3f81463be9994718f61c83551b36e0b40bf92cfc885ea922e0a120664c58a`.
+- Two later requests from the direct Space host returned Gradio's generic `Error` without a container traceback. The exact scheduler reason was not exposed. The quick allocation was reduced from 120 to 60 seconds to improve queue priority and reduce the quota required for each request; this follow-up adjustment needs a fresh generation check after quota is available.
 
 ## Remaining publishing work
 
-Push the source repository, deploy the complete backend and frontend, test generation and download on the public deployment, and share both actual URLs. Docker image build has not been verified locally because the Docker daemon was unavailable. No public deployment is claimed.
+Free GPU quotas and queue availability can affect future runs. Retest the 60-second quick mode after the ZeroGPU quota window resets. A separate GitHub push is optional; the Hugging Face Space itself is a public Git repository. Docker image build was not verified locally because the Docker daemon was unavailable.
