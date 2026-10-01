@@ -8,7 +8,7 @@
 | Rotate and zoom | Drag rotation and wheel zoom were tested on the generated car. OrbitControls also supports touch interaction and pan. |
 | Download a 3D format | The website saved the generated car as a GLB. The downloaded file's SHA-256 matches the server's original, and Three.js loaded the downloaded file independently. |
 | Free hosting | The public [Gradio ZeroGPU Space](https://huggingface.co/spaces/jayeshw/form-text-to-3d) built and ran on the user's eligible Hugging Face account. A blue-teapot prompt completed on the hosted GPU. |
-| Live URL and source repository | The [Space app](https://huggingface.co/spaces/jayeshw/form-text-to-3d) and its [public source repository](https://huggingface.co/spaces/jayeshw/form-text-to-3d/tree/main) are available. A separate GitHub push remains optional and was not done. |
+| Live URL and source repository | The [Space app](https://huggingface.co/spaces/jayeshw/form-text-to-3d) and the complete [GitHub source repository](https://github.com/Jayesh-Waghmare/form-text-to-3d) are public. The Space also has its own [source repository](https://huggingface.co/spaces/jayeshw/form-text-to-3d/tree/main). |
 
 ## Genuine generation results
 
@@ -39,4 +39,4 @@ The browser-saved car's SHA-256 is `7b99cbda4221c802ccee435a52d3e83e9683f648eece
 
 ## Remaining publishing work
 
-Free GPU quotas and queue availability can affect future runs. Retest the 60-second quick mode after the ZeroGPU quota window resets. A separate GitHub push is optional; the Hugging Face Space itself is a public Git repository. Docker image build was not verified locally because the Docker daemon was unavailable.
+Free GPU quotas and queue availability can affect future runs. Retest the 60-second quick mode after the ZeroGPU quota window resets. Docker image build was not verified locally because the Docker daemon was unavailable.

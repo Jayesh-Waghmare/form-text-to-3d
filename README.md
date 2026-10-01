@@ -17,6 +17,8 @@ The complete app uses a Python/FastAPI backend that runs Shap-E directly on CPU 
 
 **Public Hugging Face Space:** [jayeshw/form-text-to-3d](https://huggingface.co/spaces/jayeshw/form-text-to-3d). Its [public source repository](https://huggingface.co/spaces/jayeshw/form-text-to-3d/tree/main) contains the separate Gradio/ZeroGPU edition from [`hf-space/`](hf-space/README.md). Hosted generation, rotation, zoom, and GLB download passed with a blue-teapot prompt. Free GPU access can queue or exhaust its daily quota.
 
+**GitHub source:** [Jayesh-Waghmare/form-text-to-3d](https://github.com/Jayesh-Waghmare/form-text-to-3d) contains the complete FastAPI/Three.js application and the Gradio Space edition.
+
 ## Run the complete app
 
 Use Python 3.12 or 3.13. Open a terminal in this directory:
@@ -77,16 +79,14 @@ Eight JavaScript tests and four Python API tests pass. Inference is mocked in th
 
 For a real check, start the backend on port **8000**, then run `node scripts/verify-local.mjs` in another terminal. It submits a cupcake prompt, checks the resulting GLB header, loads it with Three.js GLTFLoader, and saves it in `outputs`. Pass another prompt as an argument to test a different object.
 
-## Publish your repository
+## GitHub repository
 
-Create an empty GitHub repository. The prepared local checkout already has a `main` branch and an initial commit; skip the first three commands below in that checkout. If starting from the source ZIP, run all commands. Replace the remote URL:
+This checkout is published at [Jayesh-Waghmare/form-text-to-3d](https://github.com/Jayesh-Waghmare/form-text-to-3d). To publish later local changes from this checkout:
 
 ```sh
-git init -b main
 git add .
-git commit -m "Add text-to-3D application"
-git remote add origin https://github.com/YOUR_USERNAME/form-text-to-3d.git
-git push -u origin main
+git commit -m "Describe the change"
+git push
 ```
 
 The gitignore excludes environments, model weights, generated outputs, and local secrets. Do not upload those folders through the browser either.
